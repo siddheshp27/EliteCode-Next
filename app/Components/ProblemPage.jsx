@@ -5,10 +5,12 @@ import Split from "react-split";
 import Compiler from "./ProblemPage/Compiler";
 import Console from "./ProblemPage/Console";
 import Problem from "./ProblemPage/Problem";
-import { ClientContext } from "../Context";
+import { useClientContext } from "../Context";
+
 export default function ProblemPage({ probid }) {
   const [consoleState, setConsoleState] = useState(true);
-  // const { handleSubmit } = useContext(ClientContext);
+  const { handleSubmit } = useClientContext();
+
   const toggleConsole = (e) => {
     e.preventDefault();
     setConsoleState((prev) => !prev);
