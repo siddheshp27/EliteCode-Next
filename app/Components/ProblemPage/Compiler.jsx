@@ -1,11 +1,16 @@
 // import axios from "axios";
-import React, { useState, useRef, useEffect } from "react";
+"use client";
+import React, { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
+import { ClientContext } from "@/app/Context";
 
 const Compiler = () => {
-  const [languageType, setlanguageType] = useState("py");
-  const [fileName, setFileName] = useState("py");
-  const [code, setCode] = useState(`print("Hello Word")`);
+  const { languageData } = useContext(ClientContext);
+
+  const { languageType, setlanguageType } = useContext(ClientContext);
+  const { fileName, setFileName } = useContext(ClientContext);
+
+  const { code, setCode } = useContext(ClientContext);
   const [outputValue, setOutputValue] = useState("Output goes here");
   const [screenMode, setScreenMode] = useState(false);
 
@@ -19,37 +24,6 @@ const Compiler = () => {
     setCode(value);
   };
 
-  const languageData = {
-    py: {
-      name: "script.py",
-      language: "python",
-      value: "print('Hello World')",
-    },
-    js: {
-      name: "script.js",
-      language: "javascript",
-      value: "console.log('Hello World')",
-    },
-    cpp: {
-      name: "script.cpp",
-      language: "cpp",
-      value: `#include <iostream>
-
-        int main() {
-            std::cout << "Hello, World!" << std::endl;
-            return 0;
-        }`,
-    },
-    java: {
-      name: "Main.java",
-      language: "java",
-      value: `public class Main {
-          public static void main(String[] args) {
-              System.out.println("Hello World");
-          }
-      }`,
-    },
-  };
   const file = languageData[fileName];
 
   const handleChange1 = (event) => {
@@ -151,4 +125,4 @@ const Compiler = () => {
   );
 };
 
-export { Compiler , handleSubmit};
+export default Compiler;

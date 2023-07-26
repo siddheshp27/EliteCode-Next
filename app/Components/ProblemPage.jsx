@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+"use client";
+import React, { useContext, useState } from "react";
 import Split from "react-split";
 
 import Compiler from "./ProblemPage/Compiler";
 import Console from "./ProblemPage/Console";
 import Problem from "./ProblemPage/Problem";
+import { ClientContext } from "../Context";
 
 export default function ProblemPage() {
   const [consoleState, setConsoleState] = useState(true);
-
+  const { handleSubmit } = useContext(ClientContext);
   const toggleConsole = (e) => {
     e.preventDefault();
     setConsoleState((prev) => !prev);
@@ -52,7 +54,9 @@ export default function ProblemPage() {
               className="h-4 m-1 relative top-[1.5px]"
             />
           </div>
-          <button className="" onClick={}>Submit</button>
+          <button id="hero-cta" onClick={handleSubmit}>
+            Submit
+          </button>
         </div>
       </div>
     </Split>
