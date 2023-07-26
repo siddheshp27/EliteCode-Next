@@ -2,7 +2,7 @@
 import ProblemPage from "@/app/Components/ProblemPage";
 import NavMenu from "@/app/Components/NavMenu";
 import { Auth0Provider } from "@auth0/auth0-react";
-
+import Problem from "@/app/Components/ProblemPage/Problem";
 export default function prob({ params: { id } }) {
   async function Test() {}
   return (
@@ -14,7 +14,8 @@ export default function prob({ params: { id } }) {
       }}
     >
       <NavMenu />
-      <ProblemPage probid={id} />
+      {/* <ProblemPage probid={id} /> */}
+      <Problem probid={id} />
     </Auth0Provider>
   );
 }

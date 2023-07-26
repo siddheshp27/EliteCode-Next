@@ -10,14 +10,18 @@ export default function Problem({ probid }) {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ msg: "hi" }),
     });
-    setProblemData(res.json());
+
+    const { msg } = await res.json();
+
+    setProblemData(msg);
   }, []);
 
   function Prob() {
     if (problemData) {
-      return <h1>{JSON.stringify(problemData)}</h1>;
+      console.log(problemData);
+      return <h1>{problemData}</h1>;
     }
-    return <h1>whiffed</h1>;
+    return null;
   }
   // const url = "http://localhost:8080";
   // const test = async () => {
@@ -29,7 +33,7 @@ export default function Problem({ probid }) {
 
   return (
     <div>
-      <div></div>
+      <Prob />
     </div>
   );
 }
