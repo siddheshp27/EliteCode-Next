@@ -2,15 +2,15 @@
 "use client";
 import React, { useState, useRef } from "react";
 import Editor from "@monaco-editor/react";
-import { ClientContext } from "@/app/Context";
+import { useClientContext } from "../../Context";
 
 const Compiler = () => {
-  const { languageData } = useContext(ClientContext);
+  const { languageData } = useClientContext();
 
-  const { languageType, setlanguageType } = useContext(ClientContext);
-  const { fileName, setFileName } = useContext(ClientContext);
+  const { languageType, setlanguageType } = useClientContext();
+  const { fileName, setFileName } = useClientContext();
 
-  const { code, setCode } = useContext(ClientContext);
+  const { code, setCode } = useClientContext();
   const [outputValue, setOutputValue] = useState("Output goes here");
   const [screenMode, setScreenMode] = useState(false);
 

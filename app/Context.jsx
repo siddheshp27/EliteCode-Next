@@ -1,8 +1,10 @@
-import { createContext, useState } from "react";
-import axios from "axios";
-export const ClientContext = createContext(null);
+"use client";
 
-export const ClientProvider = ({ children }) => {
+import { createContext, useContext, useState } from "react";
+
+const ClientContext = createContext({});
+
+export const ClientContextProvider = ({ children }) => {
   const [languageType, setlanguageType] = useState("py");
   const [fileName, setFileName] = useState("py");
   const [code, setCode] = useState(`print("Hello Word")`);
@@ -74,7 +76,10 @@ export const ClientProvider = ({ children }) => {
     code,
     setCode,
   };
+
   return (
     <ClientContext.Provider value={values}>{children}</ClientContext.Provider>
   );
 };
+
+export const useClientContext = () => useContext(ClientContext);
