@@ -5,9 +5,8 @@ import Split from "react-split";
 import Compiler from "./ProblemPage/Compiler";
 import Console from "./ProblemPage/Console";
 import Problem from "./ProblemPage/Problem";
-import { ClientContext } from "../Context";
-
-export default function ProblemPage() {
+import { ClientContext } from "@/app/Context";
+export default function ProblemPage({ probid }) {
   const [consoleState, setConsoleState] = useState(true);
   const { handleSubmit } = useContext(ClientContext);
   const toggleConsole = (e) => {
@@ -39,7 +38,7 @@ export default function ProblemPage() {
       className="pr-2 h-[100vh]  flex"
     >
       <div className="bg-red-500  ">
-        <Problem />
+        <Problem probid={probid} />
       </div>
       <div className="h-full">
         <HorizontalSpilt />

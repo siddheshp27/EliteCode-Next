@@ -4,6 +4,7 @@ import NavMenu from "@/app/Components/NavMenu";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 export default function prob({ params: { id } }) {
+  async function Test() {}
   return (
     <Auth0Provider
       domain="dev-75u0gzvq2kz8rrir.us.auth0.com"
@@ -13,8 +14,7 @@ export default function prob({ params: { id } }) {
       }}
     >
       <NavMenu />
-      <ProblemPage />
-      {id}
+      <ProblemPage probid={id} />
     </Auth0Provider>
   );
 }
