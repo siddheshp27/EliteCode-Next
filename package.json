@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.1.0",
+    "@aws-sdk/client-sqs": "^3.378.0",
     "@monaco-editor/react": "^4.5.1",
     "autoprefixer": "10.4.14",
+    "aws-crt": "^1.16.0",
+    "aws-sdk": "^2.1423.0",
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "eslint": "8.45.0",

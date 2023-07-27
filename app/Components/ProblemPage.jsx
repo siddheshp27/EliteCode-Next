@@ -9,7 +9,7 @@ import { useClientContext } from "../Context";
 
 export default function ProblemPage({ probid }) {
   const [consoleState, setConsoleState] = useState(true);
-  const { handleSubmit } = useClientContext();
+  const { addInQueue } = useClientContext();
 
   const toggleConsole = (e) => {
     e.preventDefault();
@@ -39,9 +39,7 @@ export default function ProblemPage({ probid }) {
       gutterAlign="center"
       className="pr-2 h-[100vh]  flex"
     >
-      <div className="bg-red-500  ">
-        <Problem probid={probid} />
-      </div>
+      <div className="bg-red-500  ">{/* <Problem probid={probid} /> */}</div>
       <div className="h-full">
         <HorizontalSpilt />
         <div className="bg-[#252627] mt-2 h-12 rounded-md flex justify-between  px-3  ">
@@ -55,7 +53,7 @@ export default function ProblemPage({ probid }) {
               className="h-4 m-1 relative top-[1.5px]"
             />
           </div>
-          <button id="hero-cta" onClick={handleSubmit}>
+          <button id="hero-cta" onClick={addInQueue}>
             Submit
           </button>
         </div>
