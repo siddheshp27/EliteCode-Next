@@ -14,8 +14,8 @@ export default function prob({ params: { id } }) {
       }}
     >
       <NavMenu />
-      {/* <ProblemPage probid={id} /> */}
-      <Problem probid={id} />
+      <ProblemPage probid={id} />
+      {/* <Problem probid={id} /> */}
     </Auth0Provider>
   );
 }

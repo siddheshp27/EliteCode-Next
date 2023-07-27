@@ -55,9 +55,9 @@ export default function ProblemPage({ probid }) {
               className="h-4 m-1 relative top-[1.5px]"
             />
           </div>
-          {/* <button id="hero-cta" onClick={handleSubmit}>
+          <button id="hero-cta" onClick={handleSubmit}>
             Submit
-          </button> */}
+          </button>
         </div>
       </div>
     </Split>

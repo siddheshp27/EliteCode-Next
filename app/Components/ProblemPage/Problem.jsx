@@ -4,16 +4,19 @@ import axios from "axios";
 export default function Problem({ probid }) {
   const [problemData, setProblemData] = useState();
 
-  useEffect(async () => {
-    const res = await fetch("/api/problems", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({ msg: "hi" }),
-    });
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch("/api/problems", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ id: probid }),
+      });
 
-    const { msg } = await res.json();
+      const { msg } = await res.json();
 
-    setProblemData(msg);
+      setProblemData(msg);
+    }
+    fetchData();
   }, []);
 
   function Prob() {
