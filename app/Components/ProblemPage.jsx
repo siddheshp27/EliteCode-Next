@@ -31,6 +31,26 @@ export default function ProblemPage({ probid }) {
     );
   }
 
+  const Bottom = () => {
+    return (
+      <div className="bg-[#252627] mt-2 h-12 rounded-md flex justify-between  px-3 ">
+        <div
+          onClick={toggleConsole}
+          className="bg-[#252729] text-sm font-medium text-[#d3d3e699] flex items-center "
+        >
+          <button>Console</button>
+          <img
+            src={`./assets/${consoleState ? "des" : "asc"}arrow.svg`}
+            className="h-4 m-1 relative top-[1.5px]"
+          />
+        </div>
+        <button id="hero-cta" onClick={handleSubmit}>
+          Submit
+        </button>
+      </div>
+    );
+  };
+
   return (
     <Split
       direction="horizontal"
@@ -39,26 +59,20 @@ export default function ProblemPage({ probid }) {
       gutterAlign="center"
       className="pr-2 h-[100vh]  flex"
     >
-      <div className="bg-red-500  ">
+      <div className="mt-2 w-[99.5%] ml-2 py-2 bg-[#252729] rounded-t-md ">
+        <div className="px-2">
+          <ul className="flex justify-between  w-3/5 text-sm relative bottom-1">
+            <li>Description</li>
+            <li>Editorial</li>
+            <li>Solutions</li>
+            <li>Submissions</li>
+          </ul>
+        </div>
         <Problem probid={probid} />
       </div>
       <div className="h-full">
         <HorizontalSpilt />
-        <div className="bg-[#252627] mt-2 h-12 rounded-md flex justify-between  px-3  ">
-          <div
-            onClick={toggleConsole}
-            className="bg-[#252729] text-sm font-medium text-[#d3d3e699] flex items-center "
-          >
-            <button>Console</button>
-            <img
-              src={`./assets/${consoleState ? "des" : "asc"}arrow.svg`}
-              className="h-4 m-1 relative top-[1.5px]"
-            />
-          </div>
-          <button id="hero-cta" onClick={handleSubmit}>
-            Submit
-          </button>
-        </div>
+        <Bottom />
       </div>
     </Split>
   );

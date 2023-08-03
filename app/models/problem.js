@@ -60,8 +60,7 @@ const testCasesSchema = mongoose.Schema({
   },
 });
 
-const Problem = mongoose.model("Problem", problemSchema);
-const Examples = mongoose.model("Examples", exampleSchema);
-const TestCases = mongoose.model("TestCases", testCasesSchema);
-
-export default Problem;
+export const Problem =
+  mongoose.models.Problem || mongoose.model("Problem", problemSchema);
+// const Examples = mongoose.model("Examples", exampleSchema);
+// const TestCases = mongoose.model("TestCases", testCasesSchema);
