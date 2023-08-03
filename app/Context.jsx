@@ -67,8 +67,25 @@ export const ClientContextProvider = ({ children }) => {
     sendCompilerCode();
   };
 
+  const addInQueue = (event) => {
+    event.preventDefault();
+    async function fetchData() {
+      const res = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: code,
+      });
+
+      const { message } = await res.json();
+
+      console.log(message);
+    }
+    fetchData();
+  };
+
   const values = {
     handleSubmit,
+    addInQueue,
     languageData,
     setlanguageType,
     fileName,
