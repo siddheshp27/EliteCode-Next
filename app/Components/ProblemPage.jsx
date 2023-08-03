@@ -44,7 +44,7 @@ export default function ProblemPage({ probid }) {
             className="h-4 m-1 relative top-[1.5px]"
           />
         </div>
-        <button id="hero-cta" onClick={handleSubmit}>
+        <button id="hero-cta" onClick={addInQueue}>
           Submit
         </button>
       </div>
@@ -70,35 +70,10 @@ export default function ProblemPage({ probid }) {
         </div>
         <Problem probid={probid} />
       </div>
-      <div className="h-full">
+      {/* <div className="h-full"> */}
+      <div>
         <HorizontalSpilt />
         <Bottom />
-  return (
-    <Split
-      direction="horizontal"
-      sizes={[45, 55]}
-      gutterSize={8}
-      gutterAlign="center"
-      className="pr-2 h-[100vh]  flex"
-    >
-      <div className="bg-red-500  ">{/* <Problem probid={probid} /> */}</div>
-      <div className="h-full">
-        <HorizontalSpilt />
-        <div className="bg-[#252627] mt-2 h-12 rounded-md flex justify-between  px-3  ">
-          <div
-            onClick={toggleConsole}
-            className="bg-[#252729] text-sm font-medium text-[#d3d3e699] flex items-center "
-          >
-            <button>Console</button>
-            <img
-              src={`./assets/${consoleState ? "des" : "asc"}arrow.svg`}
-              className="h-4 m-1 relative top-[1.5px]"
-            />
-          </div>
-          <button id="hero-cta" onClick={addInQueue}>
-            Submit
-          </button>
-        </div>
       </div>
     </Split>
   );
