@@ -8,7 +8,7 @@ import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
 export async function POST(req) {
     //Creating a function to send message to SQS queue
     const sendMessage = async () => {
-        const messageBody = req.body.code;
+        const messageBody = req.body;
         const sqsClient = new SQSClient({ region: "ap-south-1" });
         const command = new SendMessageCommand({
             QueueUrl: "https://sqs.ap-south-1.amazonaws.com/935018077921/ProcessingQueue.fifo",
