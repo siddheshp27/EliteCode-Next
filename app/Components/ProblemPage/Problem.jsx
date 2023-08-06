@@ -36,7 +36,7 @@ export default function Problem({ probid }) {
   }
   return (
     <div className="h-full bg-red-500 w-full">
-      <h1 className="">Probname</h1>
+      <h1 className="text-xl font-bold">1.Probname</h1>
       <ul className="flex w-1/3 justify-between">
         <li>difficulty</li>
         <li>like </li>
