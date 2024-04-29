@@ -89,7 +89,7 @@ const ProblemTable = ({ problems }) => {
             ))}
           </tbody>
         </table>
-        <Meteors number={80} />
+        <Meteors number={20} />
       </div>
     </div>
   );
