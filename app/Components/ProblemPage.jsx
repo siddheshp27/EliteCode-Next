@@ -1,19 +1,51 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import Split from "react-split";
 
 import Compiler from "./ProblemPage/Compiler";
 import Console from "./ProblemPage/Console";
 import Problem from "./ProblemPage/Problem";
 import { useClientContext } from "../Context";
+import { addInQueue } from "../api/submit/route";
+import { getSubmission } from "../api/problems/route";
+import { v4 } from "uuid";
 
 export default function ProblemPage({ probid }) {
-  const [consoleState, setConsoleState] = useState(true);
-  const { addInQueue } = useClientContext();
+  const editorRef = useRef(null);
 
+  const [consoleState, setConsoleState] = useState(true);
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [code, setCode] = useState(`print("Hello Word")`);
+  const { fileName } = useClientContext();
   const toggleConsole = (e) => {
     e.preventDefault();
     setConsoleState((prev) => !prev);
+  };
+
+  const handleSubmit = async () => {
+    setSubmitLoading(true);
+    console.log(editorRef.current.getValue());
+    console.log(fileName);
+    const code = editorRef.current.getValue();
+    const id = v4();
+    const queueRes = await addInQueue({
+      probid,
+      id,
+      code,
+      languageType: fileName,
+    });
+
+    if (queueRes.success) {
+      async function polling() {
+        const output = await getSubmission(id);
+        if (output) {
+          console.log("Hellyeah", output);
+          return;
+        }
+        setTimeout(polling, 7500);
+      }
+      setTimeout(polling, 7500);
+    }
   };
 
   function HorizontalSpilt() {
@@ -25,7 +57,7 @@ export default function ProblemPage({ probid }) {
         gutterAlign="center"
         className="h-5/6"
       >
-        <Compiler />
+        <Compiler setCode={setCode} editorRef={editorRef} />
         {consoleState && <Console />}
       </Split>
     );
@@ -40,11 +72,11 @@ export default function ProblemPage({ probid }) {
         >
           <button>Console</button>
           <img
-            src={`./assets/${consoleState ? "des" : "asc"}arrow.svg`}
+            src={`/image/${consoleState ? "des" : "asc"}arrow.svg`}
             className="h-4 m-1 relative top-[1.5px]"
           />
         </div>
-        <button id="hero-cta" onClick={addInQueue}>
+        <button id="hero-cta" disabled={submitLoading} onClick={handleSubmit}>
           Submit
         </button>
       </div>

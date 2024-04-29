@@ -1,11 +1,12 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const ClientContext = createContext({});
 
 export const ClientContextProvider = ({ children }) => {
-  const [languageType, setlanguageType] = useState("py");
+  const [languageType, setLanguageType] = useState("py");
   const [fileName, setFileName] = useState("py");
   const [code, setCode] = useState(`print("Hello Word")`);
   const languageData = {
@@ -45,7 +46,7 @@ export const ClientContextProvider = ({ children }) => {
     const sendCompilerCode = async () => {
       const payload = {
         languageType,
-        code: languageData[languageType].value,
+        code: languageData[fileName].value,
       };
       const headers = {
         "Content-Type": "application/json",
@@ -69,11 +70,12 @@ export const ClientContextProvider = ({ children }) => {
 
   const addInQueue = (event) => {
     event.preventDefault();
+    const pid = uuidv4();
     async function fetchData() {
       const res = await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: code,
+        body: { pid, code, fileName },
       });
 
       const { message } = await res.json();
@@ -87,7 +89,7 @@ export const ClientContextProvider = ({ children }) => {
     handleSubmit,
     addInQueue,
     languageData,
-    setlanguageType,
+    setLanguageType,
     fileName,
     setFileName,
     code,

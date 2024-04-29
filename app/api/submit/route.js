@@ -1,32 +1,24 @@
-import { NextResponse } from 'next/server'
-//Importing packages for aws sqs
-
+"use server";
 import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
+// import { v4 } from "uuid";
+export async function addInQueue(messageBody) {
+  //Creating a function to send message to SQS queue
+  // messageBody.id = v4();
+  console.log(messageBody);
+  // return 0;
+  const sqsClient = new SQSClient({ region: "ap-south-1" });
+  const command = new SendMessageCommand({
+    QueueUrl:
+      "https://sqs.ap-south-1.amazonaws.com/471112533947/elitecode_fifo_queue.fifo",
+    MessageBody: JSON.stringify(messageBody),
+    MessageGroupId: "1",
+  });
+  const sqsReply = await sqsClient.send(command);
+  console.log(sqsReply);
 
-
-// const SQS_QUEUE_URL = "https://sqs.ap-south-1.amazonaws.com/935018077921/ProcessingQueue.fifo";
-export async function POST(req) {
-    //Creating a function to send message to SQS queue
-    const sendMessage = async () => {
-        const messageBody = req.body;
-        const sqsClient = new SQSClient({ region: "ap-south-1" });
-        const command = new SendMessageCommand({
-            QueueUrl: "https://sqs.ap-south-1.amazonaws.com/935018077921/ProcessingQueue.fifo",
-            MessageBody: `${messageBody}`,
-            MessageGroupId: "1",
-            MessageDeduplicationId: "1",
-        });
-        const sqsReply = await sqsClient.send(command)
-        console.log(sqsReply);
-        return sqsReply;
-    }
-    sendMessage();
-
-    if (sendMessage) {
-        return NextResponse.json({ message: "Message sent successfully" });
-    } else {
-        return NextResponse.json({ message: "Error sending message" });
-
-    }
-
+  if (sqsReply) {
+    return { success: "Message sent successfully" };
+  } else {
+    return { error: "Error sending message" };
+  }
 }
