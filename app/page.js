@@ -11,7 +11,7 @@ const App = () => {
       domain="dev-75u0gzvq2kz8rrir.us.auth0.com"
       clientId="LRl4LJvJ2Uu9VemQIDJgS6RSjvNvGPxM"
       authorizationParams={{
-        redirect_uri: "http://localhost:3000/",
+        redirect_uri: "http://localhost:3000/dashboard",
       }}
     >
       <div className="main w-full overflow-clip">

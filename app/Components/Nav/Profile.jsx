@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import ProfileMenu from "./ProfileMenu";
 
-const Profile = () => {
+const Profile = (props) => {
+  const { isHovering, setIsHoveringProfile } = props;
   const { user, isAuthenticated, isLoading } = useAuth0();
   console.log(user);
 
-  if (isLoading) {
-    // return <div>Loading ...</div>;
-  }
-
   return (
     isAuthenticated && (
-      <img
-        src={user.picture}
-        className="rounded-full w-[2.05rem]  h-[2.05rem]"
-      ></img>
+      <div className="flex flex-col w-full items-center justify-center">
+        {isHovering && (
+          <ProfileMenu
+            setIsHoveringProfile={setIsHoveringProfile}
+            isHovering={isHovering}
+          />
+        )}
+        <img src={user.picture} className="rounded-full w-12 mt-8"></img>
+      </div>
     )
   );
 };

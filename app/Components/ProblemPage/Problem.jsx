@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getProblem } from "@/app/api/problems/route";
+import { getProblem } from "../../api/problems/route";
 
 export default function Problem({ probid }) {
   const [problemData, setProblemData] = useState(false);
