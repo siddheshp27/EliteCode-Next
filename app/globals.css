@@ -1,13 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Bebas+Neue&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .main,
 html {
-  background-color: #141516;
-  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
-
+.poppins-font {
+  font-family: "Poppins", sans-serif;
+}
 .gutter {
   background-color: #141516;
   background-repeat: no-repeat;
