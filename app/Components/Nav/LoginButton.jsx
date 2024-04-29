@@ -8,7 +8,7 @@ const LoginButton = (e) => {
     <div>
       {!isAuthenticated && (
         <button
-          className="relative right-8 border-2 bg-neutral-900 text-white border-black px-5 py-2 rounded-lg font-lato font-semibold "
+          className="relative right-8 border-2 bg-white poppins-font tracking-wide text-black border-black px-5 py-2 rounded-lg font-semibold "
           onClick={() => loginWithRedirect()}
         >
           Log In
