@@ -34,7 +34,7 @@ export function HeroSection() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="relative flex flex-col gap-4 items-center justify-center px-4 overflow-x-clip"
+        className="relative flex flex-col gap-4 items-center justify-center px-4 overflow-x-clip h-screen"
       >
         <div className="flex flex-col items-center justify-center h-[40rem]  ">
           <p className="text-neutral-200 text-xs sm:text-base  ">

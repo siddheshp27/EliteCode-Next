@@ -1,11 +1,21 @@
 "use server";
 
-import runQuery from "../dbquery";
+import runQuery, { runQueryAll } from "../dbquery";
 
 async function getProblem(req) {
   try {
     const data = await runQuery(
       `SELECT * FROM questions where question_id=${req}`
+    );
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+async function getAllProblems() {
+  try {
+    const data = await runQueryAll(
+      `SELECT * FROM questions`
     );
     return data;
   } catch (error) {
@@ -21,4 +31,4 @@ async function getSubmission(req) {
   }
 }
 
-export { getProblem, getSubmission };
+export { getProblem, getSubmission, getAllProblems };
