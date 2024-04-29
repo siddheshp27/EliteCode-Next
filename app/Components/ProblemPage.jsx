@@ -36,12 +36,14 @@ export default function ProblemPage({ probid }) {
     });
 
     if (queueRes.success) {
+      let count = 0;
       async function polling() {
         const output = await getSubmission(id);
-        if (output) {
+        if (output || count > 5) {
           console.log("Hellyeah", output);
           return;
         }
+        count++;
         setTimeout(polling, 7500);
       }
       setTimeout(polling, 7500);
