@@ -33,7 +33,9 @@ export default function ProblemPage({ probid }) {
         className="h-[93%]"
       >
         <Compiler editorRef={editorRef} />
-        {consoleState && <Console output={consoleOutput} />}
+        {consoleState && (
+          <Console output={consoleOutput} submitLoading={submitLoading} />
+        )}
       </Split>
     );
   }
