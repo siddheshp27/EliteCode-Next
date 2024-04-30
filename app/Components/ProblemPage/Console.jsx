@@ -15,39 +15,51 @@ export default function Console(props) {
   }
   return (
     <div className="h-full w-full p-1 bg-[#1e1e1e] rounded-md">
-      <div className="h-1/5 px-2  font-bold   border-4 rounded-md">Output</div>
-      <div className="h-4/5 text-white">
-        {output?.output != undefined &&
-          !output?.status &&
-          isJSONParsable(output.output) && (
-            <h1 className="text-red-500 font-bold">
-              Error :{JSON.stringify(JSON.parse(output.output).issue)}
-            </h1>
-          )}
-        {output?.status && fileName == "java" && (
-          <h1 className="text-green-500">All the Testcases Passed</h1>
-        )}
-        {fileName == "java" && (
-          <div>
+      {submitLoading && (
+        <div className="flex items-center h-full justify-center bg-black">
+          <Loader />
+        </div>
+      )}
+      {!submitLoading && (
+        <>
+          <div className="h-1/5 px-2 text-lg  text-white bebas-font tracking-widest font-medium border-4 rounded-md">
+            Output
+          </div>
+          <div className="h-4/5 text-white">
             {output?.output != undefined &&
-              isJSONParsable(output?.output) &&
-              !JSON.parse(output.output).error && (
-                <div className="text-red-500">
-                  <h1>Input : {JSON.parse(output.output).input}</h1>
-                  <h1>
-                    Expected Output :{JSON.parse(output.output).expected_output}
-                  </h1>
-                  <h1>Output : {JSON.parse(output.output).output}</h1>
-                </div>
+              !output?.status &&
+              isJSONParsable(output.output) && (
+                <h1 className="text-red-500 font-bold">
+                  Error :{JSON.stringify(JSON.parse(output.output).issue)}
+                </h1>
               )}
+            {output?.status && fileName == "java" && (
+              <h1 className="text-green-500">All the Testcases Passed</h1>
+            )}
+            {fileName == "java" && (
+              <div>
+                {output?.output != undefined &&
+                  isJSONParsable(output?.output) &&
+                  !JSON.parse(output.output).error && (
+                    <div className="text-red-500">
+                      <h1>Input : {JSON.parse(output.output).input}</h1>
+                      <h1>
+                        Expected Output :
+                        {JSON.parse(output.output).expected_output}
+                      </h1>
+                      <h1>Output : {JSON.parse(output.output).output}</h1>
+                    </div>
+                  )}
+              </div>
+            )}
+            {fileName != "java" && !isJSONParsable(output?.output) && (
+              <div className="text-green-500">
+                <div>{output.output?.trim()}</div>
+              </div>
+            )}
           </div>
-        )}
-        {fileName != "java" && !isJSONParsable(output?.output) && (
-          <div className="text-green-500">
-            <div>{output.output?.trim()}</div>
-          </div>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 }
