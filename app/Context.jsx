@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const ClientContext = createContext({});
@@ -9,7 +9,7 @@ export const ClientContextProvider = ({ children }) => {
   const [languageType, setLanguageType] = useState("py");
   const [fileName, setFileName] = useState("py");
   const [code, setCode] = useState(`print("Hello Word")`);
-  const languageData = {
+  const [languageData, setLanguageData] = useState({
     py: {
       name: "script.py",
       language: "python",
@@ -39,7 +39,7 @@ export const ClientContextProvider = ({ children }) => {
             }
         }`,
     },
-  };
+  });
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -89,6 +89,7 @@ export const ClientContextProvider = ({ children }) => {
     handleSubmit,
     addInQueue,
     languageData,
+    setLanguageData,
     setLanguageType,
     fileName,
     setFileName,

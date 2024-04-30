@@ -10,13 +10,13 @@ const Profile = (props) => {
   return (
     isAuthenticated && (
       <div className="flex flex-col w-full items-center justify-center">
-        {isHovering && (
+        {false && (
           <ProfileMenu
             setIsHoveringProfile={setIsHoveringProfile}
             isHovering={isHovering}
           />
         )}
-        <img src={user.picture} className="rounded-full w-12 mt-8"></img>
+        <img src={user.picture} className="rounded-full w-10 "></img>
       </div>
     )
   );

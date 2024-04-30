@@ -15,7 +15,7 @@ function ProfileMenu(props) {
         onMouseOut={() => setIsHoveringProfile(false)}
       >
         <div className=" flex items-center w-full border-2 border-gray-300 border-x-0 bg-white py-4 px-8 mr-12 ">
-          <img src={user.picture} className="rounded-full w-14 h-14 mr-4"></img>
+          <img src={user.picture} className="rounded-full w-12 h-12 mr-4"></img>
 
           <ul className="list-none">
             <li className="font-bold text-base py-1">{user.name}</li>

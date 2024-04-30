@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Split from "react-split";
 
 import Compiler from "./ProblemPage/Compiler";
@@ -14,40 +14,13 @@ export default function ProblemPage({ probid }) {
   const editorRef = useRef(null);
 
   const [consoleState, setConsoleState] = useState(true);
+  const { languageData, setLanguageData } = useClientContext();
+  const [consoleOutput, setConsoleOutput] = useState({});
   const [submitLoading, setSubmitLoading] = useState(false);
-  const [code, setCode] = useState(`print("Hello Word")`);
   const { fileName } = useClientContext();
   const toggleConsole = (e) => {
     e.preventDefault();
     setConsoleState((prev) => !prev);
-  };
-
-  const handleSubmit = async () => {
-    setSubmitLoading(true);
-    console.log(editorRef.current.getValue());
-    console.log(fileName);
-    const code = editorRef.current.getValue();
-    const id = v4();
-    const queueRes = await addInQueue({
-      probid,
-      id,
-      code,
-      languageType: fileName,
-    });
-
-    if (queueRes.success) {
-      let count = 0;
-      async function polling() {
-        const output = await getSubmission(id);
-        if (output || count > 5) {
-          console.log("Hellyeah", output);
-          return;
-        }
-        count++;
-        setTimeout(polling, 7500);
-      }
-      setTimeout(polling, 7500);
-    }
   };
 
   function HorizontalSpilt() {
@@ -57,15 +30,49 @@ export default function ProblemPage({ probid }) {
         sizes={consoleState ? [70, 30] : [100]}
         gutterSize={8}
         gutterAlign="center"
-        className="h-5/6"
+        className="h-[93%]"
       >
-        <Compiler setCode={setCode} editorRef={editorRef} />
-        {consoleState && <Console />}
+        <Compiler editorRef={editorRef} />
+        {consoleState && <Console output={consoleOutput} />}
       </Split>
     );
   }
 
   const Bottom = () => {
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setLanguageData((prev) => {
+        const temp = { ...prev[fileName], value: editorRef.current.getValue() };
+        return { ...prev, [fileName]: temp };
+      });
+      setSubmitLoading(true);
+      console.log(editorRef.current.getValue());
+      console.log(fileName);
+      const code = editorRef.current.getValue();
+      const id = v4();
+      const queueRes = await addInQueue({
+        probid,
+        id,
+        code,
+        languageType: fileName,
+      });
+
+      if (queueRes.success) {
+        let count = 0;
+        async function polling() {
+          const output = await getSubmission(id);
+          if (output || count > 5) {
+            console.log(output);
+            setConsoleOutput(output);
+            setSubmitLoading(false);
+            return;
+          }
+          count++;
+          setTimeout(polling, 7500);
+        }
+        setTimeout(polling, 4000);
+      }
+    };
     return (
       <div className="bg-[#252627] mt-2 h-12 rounded-md flex justify-between  px-3 ">
         <div
@@ -91,7 +98,7 @@ export default function ProblemPage({ probid }) {
       sizes={[45, 55]}
       gutterSize={8}
       gutterAlign="center"
-      className="pr-2 h-[100vh]  flex"
+      className="pr-2 h-[90%]  flex"
     >
       <div className="mt-2 w-[99.5%] ml-2 py-2 bg-[#252729] rounded-t-md ">
         <div className="px-2">
@@ -104,7 +111,6 @@ export default function ProblemPage({ probid }) {
         </div>
         <Problem probid={probid} />
       </div>
-      {/* <div className="h-full"> */}
       <div>
         <HorizontalSpilt />
         <Bottom />

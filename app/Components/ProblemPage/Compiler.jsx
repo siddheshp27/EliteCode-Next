@@ -1,10 +1,10 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Editor from "@monaco-editor/react";
 import { useClientContext } from "../../Context";
 
-const Compiler = ({ setCode, editorRef }) => {
-  const { languageData } = useClientContext();
+const Compiler = React.memo(({ editorRef }) => {
+  const { languageData, setLanguageData } = useClientContext();
   const { fileName, setFileName } = useClientContext();
   const [screenMode, setScreenMode] = useState(false);
 
@@ -12,16 +12,16 @@ const Compiler = ({ setCode, editorRef }) => {
     editorRef.current = editor;
   };
 
-  // const handleEditorChange = (value) => {
-  //   console.log(editorRef.current.getValue());
-  // };
-
   const file = languageData[fileName];
 
   const handleChange1 = (event) => {
     const lang = event.target.value;
+    setLanguageData((prev) => {
+      const temp = { ...prev[fileName], value: editorRef.current.getValue() };
+      return { ...prev, [fileName]: temp };
+    });
     setFileName(lang);
-    setCode(languageData[lang].value);
+    // setCode(languageData[lang].value);
   };
 
   // const handleSubmit = (event) => {
@@ -107,6 +107,6 @@ const Compiler = ({ setCode, editorRef }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Compiler;

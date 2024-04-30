@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
-import { useState, useEffect } from "react";
-import { useAuth0, Auth0Provider } from "@auth0/auth0-react";
-import ProblemPage from "./Components/ProblemPage";
+import { Auth0Provider } from "@auth0/auth0-react";
 import Home from "./Components/Home";
 
 const App = () => {
@@ -14,7 +12,7 @@ const App = () => {
         redirect_uri: "http://localhost:3000/dashboard",
       }}
     >
-      <div className="main w-full overflow-clip">
+      <div className="main h-screen w-full">
         <Home />
       </div>
     </Auth0Provider>
