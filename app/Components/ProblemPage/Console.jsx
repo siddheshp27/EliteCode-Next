@@ -5,7 +5,9 @@ export default function Console({ output }) {
   const { fileName } = useClientContext();
   return (
     <div className="h-full w-full p-1 bg-[#1e1e1e] rounded-md">
-      <div className="h-1/5 px-2  font-bold   border-4 rounded-md">Output</div>
+      <div className="h-1/5 px-2 text-lg  text-white bebas-font tracking-widest font-medium border-4 rounded-md">
+        Output
+      </div>
       <div className="h-4/5 text-white">
         {JSON.stringify(output)}
         {output.status && <h1 className="bg-red-500">Compilation error</h1>}

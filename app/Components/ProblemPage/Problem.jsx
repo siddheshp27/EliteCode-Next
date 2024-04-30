@@ -19,7 +19,7 @@ export default function Problem({ probid }) {
       return (
         <div className="h-full bg-slate-600 text-white w-full">
           <div className="p-2">
-            <h1 className="text-xl font-bold">
+            <h1 className="text-xl font-bold text-white">
               {problemData.question_id}.{problemData.question_title}
             </h1>
             <ul className="flex w-1/3 justify-between">
