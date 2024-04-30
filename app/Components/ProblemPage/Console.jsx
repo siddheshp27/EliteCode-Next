@@ -1,7 +1,8 @@
 import { useClientContext } from "./../../Context";
 import React from "react";
-
-export default function Console({ output }) {
+import Loader from "../../Components/Loader";
+export default function Console(props) {
+  const { output, submitLoading } = props;
   const { fileName } = useClientContext();
 
   function isJSONParsable(str) {

@@ -33,7 +33,9 @@ export default function ProblemPage({ probid }) {
         className="h-[93%]"
       >
         <Compiler editorRef={editorRef} />
-        {consoleState && <Console output={consoleOutput} />}
+        {consoleState && (
+          <Console output={consoleOutput} submitLoading={submitLoading} />
+        )}
       </Split>
     );
   }
@@ -85,8 +87,15 @@ export default function ProblemPage({ probid }) {
             className="h-4 m-1 relative top-[1.5px]"
           />
         </div>
-        <button id="hero-cta" disabled={submitLoading} onClick={handleSubmit}>
-          Submit
+
+        <button
+          className="group relative inline-flex justify-center items-center overflow-hidden rounded border border-current px-8 py-3  focus:outline-none focus:ring bg-white text-black hover:bg-black hover:text-white my-1 pt-4 "
+          disabled={submitLoading}
+          onClick={handleSubmit}
+        >
+          <span className="text-sm tracking-widest poppins-font font-extrabold rounded-xl transition-all text-center px-1 py-0.5 focus:outline-none">
+            Submit
+          </span>
         </button>
       </div>
     );
@@ -100,7 +109,7 @@ export default function ProblemPage({ probid }) {
       gutterAlign="center"
       className="pr-2 h-[90%]  flex"
     >
-      <div className="mt-2 w-[99.5%] ml-2 py-2 bg-[#252729] rounded-t-md ">
+      <div className="mt-2 w-[99.5%] ml-2 bg-[#252729] text-white gap-4 rounded-t-md poppins-font text-lg py-4">
         <div className="px-2">
           <ul className="flex justify-between  w-3/5 text-sm relative bottom-1">
             <li>Description</li>
